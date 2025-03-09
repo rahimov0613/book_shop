@@ -6,6 +6,8 @@ export const authorController = {
         try {
             const body = req.body;
             const result = await createAuthor(body);
+            console.log(body);
+            
             res.status(201).send(result);
         } catch (error) {
             next(error);

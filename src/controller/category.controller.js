@@ -1,4 +1,4 @@
-import { createOrder, getAllOrder, getOrderById } from "../servies/index.js";
+import { createCategory, deleteCategory, getAllCategory, getCategoryById, updateCategory, } from "../servies/index.js";
 
 
 export const categoryController = {
@@ -6,7 +6,7 @@ export const categoryController = {
     async create(req, res, next) {
         try {
             const body = req.body;
-            const result = await createOrder(body);
+            const result = await createCategory(body);
 
             res.status(201).send(result);
 
@@ -17,7 +17,7 @@ export const categoryController = {
     //get all
     async getAll(req, res, next) {
         try {
-            const result = await getAllOrder();
+            const result = await getAllCategory();
             res.status(200).send(result);
 
         } catch (error) {
@@ -31,7 +31,7 @@ export const categoryController = {
             if (!orderId) {
                 return res.status(400).send({ message: "Invalid order id" });
             }
-            const result = await getOrderById(orderId);
+            const result = await getCategoryById(orderId);
             res.status(200).send(result);
 
         } catch (error) {
@@ -46,7 +46,7 @@ export const categoryController = {
                 return res.status(400).send({ message: "Invalid order id" });
             }
             const body = req.body;
-            const result = await updateOrder(orderId, body);
+            const result = await updateCategory(orderId, body);
             res.status(200).send(result);
 
 
@@ -61,7 +61,7 @@ export const categoryController = {
             if (!orderId) {
                 return res.status(400).send({ message: "Invalid order id" });
             }
-            const result = await deleteOrder(orderId);
+            const result = await deleteCategory(orderId);
             res.status(200).send(result);
 
 

@@ -1,12 +1,12 @@
-import { createBook, deleteBook, getAllBooks, getBookById, updateBook } from "../servies/index.js";
+import { createCustomer, deleteOneCustomer, getAllCustomers, getOneCustomer, updateCustomer } from "../servies/index.js";
 
 
-export const bookController = {
+export const CustomerController = {
     //create
     async create(req, res, next) {
         try {
             const body = req.body;
-            const result = await createBook(body);
+            const result = await createCustomer(body);
             res.status(201).send(result);
 
         } catch (error) {
@@ -16,7 +16,7 @@ export const bookController = {
     //get all
     async getAll(req, res, next) {
         try {
-            const result = await getAllBooks();
+            const result = await getAllCustomers();
             res.status(200).send(result);
 
         } catch (error) {
@@ -26,13 +26,12 @@ export const bookController = {
     //get one
     async getById(req, res, next) {
         try {
-            const bookId = parseInt(req.params.id);
-            if (!bookId) {
-                return res.status(400).send({ message: "Invalid book id" });
+            const customerId = parseInt(req.params.id);
+            if (!customerId) {
+                return res.status(400).send({ message: "Invalid customer id" });
             }
-            const result = await getBookById(bookId);
+            const result = await getOneCustomer(customerId);
             res.status(200).send(result);
-
 
         } catch (error) {
             next(error);
@@ -41,12 +40,12 @@ export const bookController = {
     //update
     async update(req, res, next) {
         try {
-            const bookId = parseInt(req.params.id);
-            if (!bookId) {
-                return res.status(400).send({ message: "Invalid book id" });
+            const customerId = parseInt(req.params.id);
+            if (!customerId) {
+                return res.status(400).send({ message: "Invalid customer id" });
             }
             const body = req.body;
-            const result = await updateBook(bookId, body);
+            const result = await updateCustomer(customerId, body);
             res.status(200).send(result);
 
         } catch (error) {
@@ -56,13 +55,13 @@ export const bookController = {
     // delete
     async delete(req, res, next) {
         try {
-
-            const bookId = parseInt(req.params.id);
-            if (!bookId) {
-                return res.status(400).send({ message: "Invalid book id" });
+            const customerId = parseInt(req.params.id);
+            if (!customerId) {
+                return res.status(400).send({ message: "Invalid customer id" });
             }
-            const result = await deleteBook(bookId);
+            const result = await deleteOneCustomer(customerId);
             res.status(200).send(result);
+
         } catch (error) {
             next(error);
         }

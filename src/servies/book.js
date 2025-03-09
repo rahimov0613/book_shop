@@ -2,10 +2,10 @@ import pool from "../config/db.js";
 
 export async function createBook(book) {
     try {
-        const query = `INSERT INTO Books (title, publisher_id, publication_year, isbn, price, categoryId, stock_quantity)
+        const query = `INSERT INTO Books (title, publisherId, publication_year, isbn, price, categoryId, stock_quantity)
     VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *`;
 
-        const values = [book.title, book.publisher_id, book.publication_year, book.isbn, book.price, book.categoryId, book.stock_quantity];
+        const values = [book.title, book.publisherId, book.publication_year, book.isbn, book.price, book.categoryId, book.stock_quantity];
         const result = await pool.query(query, values);
 
         return result.rows[0];
@@ -27,7 +27,10 @@ export async function getBookById(bookId) {
     try {
         const query = "SELECT * FROM books WHERE id = $1";
         const values = [bookId];
-
+        console.log(values);
+        console.log(query);
+        
+        
         const result = await pool.query(query, values);
         return result.rows[0];
     } catch (error) {

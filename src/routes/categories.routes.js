@@ -4,7 +4,7 @@ import { categoryController } from "../controller/index.js";
 export const categoryRouter = Router();
 
 // create
-categoryRouter.post("/"),
+categoryRouter.post("/", categoryController.create),
 
     // get all
     categoryRouter.get("/", categoryController.getAll),

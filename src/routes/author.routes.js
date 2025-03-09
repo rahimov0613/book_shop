@@ -17,6 +17,6 @@ authorRouter.post("/", authorController.create),
     authorRouter.put("/:id", authorController.update),
 
     //delete
-    authorRouter.delete("/:id", authorController.delete);
+    authorRouter .delete("/:id", authorController.delete);
 
 

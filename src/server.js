@@ -24,6 +24,6 @@ app.use((err, req, res, next) => {
 });
  
 //start server
-app.listen(port, () => {
+app.listen(port, () => { 
     console.log(`Server is running on port ${port}`)
 });

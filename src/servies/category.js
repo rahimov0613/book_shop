@@ -1,60 +1,59 @@
 import pool from "../config/db.js";
 
-export async function createOrder(order) {
+export async function createCategory(category) {
     try {
-        const query = "INSERT INTO orders( customerId, order_date, status) VALUES ($1,$2,$3) RETURNING *";
-        const values = [order.customerId, order.order_date, order.status];
+        const query = "INSERT INTO categories (category_name) VALUES ($1) RETURNING *";
+        const values = [category.category_name];
 
         const result = await pool.query(query, values);
         return result.rows[0];
     } catch (error) {
-        console.error("error creating order", error);
+        console.error("error creating category", error);
         throw error;
     }
 }
-export async function getAllOrder() {
+export async function getAllCategory() {
     try {
-        const orders = await pool.query("SELECT * FROM orders");
-        return orders.rows;
+        const categories = await pool.query("SELECT * FROM categories");
+        return categories.rows;
     } catch (error) {
-        console.error("error getting all orders", error);
+        console.error("error getting all categories", error);
         throw error;
     }
 }
-export async function getOrderById(orderId) {
+export async function getCategoryById(categoryId) {
     try {
-        const query = "SELECT * FROM orders WHERE id = $1";
-        const values = [orderId];
-
-        const result = await pool.query(query, values);
-        return result.rows[0];
-
-    } catch (error) {
-        console.error("error getting order by id", error);
-        throw error;
-    }
-}
-export async function updateOrder(orderId, order) {
-    try {
-        const query = "UPDATE orders SET status = $1 WHERE id = $2 RETURNING *";
-        const values = [order.status, orderId];
+        const query = "SELECT * FROM categories WHERE id = $1";
+        const values = [categoryId];
 
         const result = await pool.query(query, values);
         return result.rows[0];
     } catch (error) {
-        console.error("error updating order", error);
+        console.error("error getting category by id", error);
         throw error;
     }
 }
-export async function deleteOrder(orderId) {
+export async function updateCategory(categoryId,category) {
     try {
-        const query = "DELETE FROM orders WHERE id = $1 RETURNING *";
-        const values = [orderId];
+        const query = "UPDATE categories SET name = $1 WHERE id = $2 RETURNING *";
+        const values = [category.name, categoryId];
 
         const result = await pool.query(query, values);
         return result.rows[0];
     } catch (error) {
-        console.error("error deleting order", error);
+        console.error("error updating category", error);
+        throw error;
+    }
+}
+export async function deleteCategory(categoryId) {
+    try {
+        const query = "DELETE FROM categories WHERE id = $1 RETURNING *";
+        const values = [categoryId];
+
+        const result = await pool.query(query, values);
+        return result.rows[0];
+    } catch (error) {
+        console.error("error deleting category", error);
         throw error;
     }
 }

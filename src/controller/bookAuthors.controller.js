@@ -1,12 +1,11 @@
-import { createBook, deleteBook, getAllBooks, getBookById, updateBook } from "../servies/index.js";
+import { createBookAthors, deleteOnebookAuthors, getAllBookAuthors, getOneBookAuthors, updateBookAuthors } from '../servies/index.js'
 
-
-export const bookController = {
+export const bookAuthcorsCOntroller = {
     //create
     async create(req, res, next) {
         try {
             const body = req.body;
-            const result = await createBook(body);
+            const result = await createBookAthors(body);
             res.status(201).send(result);
 
         } catch (error) {
@@ -16,7 +15,7 @@ export const bookController = {
     //get all
     async getAll(req, res, next) {
         try {
-            const result = await getAllBooks();
+            const result = await getAllBookAuthors();
             res.status(200).send(result);
 
         } catch (error) {
@@ -30,7 +29,7 @@ export const bookController = {
             if (!bookId) {
                 return res.status(400).send({ message: "Invalid book id" });
             }
-            const result = await getBookById(bookId);
+            const result = await getOneBookAuthors(bookId);
             res.status(200).send(result);
 
 
@@ -46,7 +45,7 @@ export const bookController = {
                 return res.status(400).send({ message: "Invalid book id" });
             }
             const body = req.body;
-            const result = await updateBook(bookId, body);
+            const result = await updateBookAuthors(bookId, body);
             res.status(200).send(result);
 
         } catch (error) {
@@ -61,8 +60,9 @@ export const bookController = {
             if (!bookId) {
                 return res.status(400).send({ message: "Invalid book id" });
             }
-            const result = await deleteBook(bookId);
+            const result = await deleteOnebookAuthors(bookId);
             res.status(200).send(result);
+
         } catch (error) {
             next(error);
         }
